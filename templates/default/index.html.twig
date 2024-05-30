@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+
+    <div class="jumbotron">
+        <div class="container"><br><br>
+            <h1 class="display-3">Book Shop!</h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique."Where Knowledge and Imagination Intertwine: Your Bookshop Destination</p>
+            <p><a class="btn btn-dark btn-lg" href="/{{ path('app_user_product_index') }}" role="button">Show Product &raquo;</a></p>
+        </div>
+    </div>
+    <!-- Example row of columns -->
+    <br><br>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4">
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.text | length > 95 ? product.text | slice(0, 95) ~ '...' : product.text  }}</p>
+{#                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>#}
+            </div>
+        {% endfor %}
+    </div>
+
+    <hr>
+{% endblock %}

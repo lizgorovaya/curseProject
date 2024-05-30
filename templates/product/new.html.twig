@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}New Blog{% endblock %}
+
+{% block body %}
+    <br><br><br>
+    <h1 class="text-center">Create new Product</h1>
+    <br>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-primary mr-2">Save</button>
+        <a href="{{ path('app_product_index') }}" class="btn btn-success">Back to list</a>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

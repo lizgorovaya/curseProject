@@ -1,0 +1,58 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+    <br><br><br>
+    <h1>Products</h1>
+<br>
+    {{ form_start(search_form) }}
+    {{ form_widget(search_form) }}
+    <button class="btn btn-dark ">Find</button>
+    {{ form_end(search_form) }}
+    <br><br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Text</th>
+                <th>Author</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.text }}</td>
+                <td>{{ product.author }}</td>
+                <td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_product_show', {'id': product.id}) }}" >show</a>
+                    {% else %}
+                        <a href="{{ path('app_user_product_show', {'id': product.id}) }}" >show</a>
+                    {% endif %}
+                    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('app_product_new') }}" class="btn btn-dark">Create new</a>
+    {% else %}
+    <a href="{{ path('app_user_product_new') }}" class="btn btn-dark">Create new</a>
+    {% endif %}
+
+    <br><br>
+{% endblock %}
